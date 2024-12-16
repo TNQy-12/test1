@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Air Quality Detector</title>
+        <link rel="stylesheet" href="style1.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="Icon" href="img/uth_logo_2.png">
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/highcharts-more.js"></script>
+        <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+<body>
+    <!-- Phần code navbar -->
+    <div class="sidebar">
+        <div class="top">
+            <div class="logo">
+                <span>Air Quality Detector</span>
+            </div>
+            <i class="bx bx-menu" id="btn"></i> 
+        </div>
+        
+        <div class="user">
+            <img src="img/uth_logo_2.png" alt="me" class="user-img">
+            <div>
+                <p class="bold">ĐẠI HỌC GIAO THÔNG VẬN TẢI TP.HCM</p>
+                <p>Admin</p>
+            </div>
+        </div>
+        <ul>
+            <li id="homeLink">
+                <a href="admin.html">
+                    <i class="bx bxs-grid-alt"></i>
+                    <span class="nav-item">Home</span>
+                </a>
+                <span class="tooltip">Home</span>
+            </li>
+            <li id="informationLink">
+                <a href="Infor.html">
+                    <i class="bx bx-body"></i>
+                    <span class="nav-item">Information</span>
+                </a>
+                <span class="tooltip">Information</span>
+            </li>
+                      
+        </ul>
+    </div>
+
+
+    <div class="main-content">
+        <header>
+            <h1>Giới thiệu Nhóm và Đề tài</h1>
+            <h1>Nhóm</h1>
+        </header>
+        <section id="topic">
+            <h1>ĐỀ TÀI: MÔ HÌNH GIẢI PHÁP CHO HỆ THỐNG GIÁM SÁT CHẤT LƯỢNG KHÔNG KHÍ </h1>
+            <p>Hệ thống phải cung cấp dữ liệu chính xác và cập nhật liên tục về chất lượng không khí, từ đó giúp các cơ quan quản lý có thể đưa ra các quyết định kịp thời để bảo vệ sức khỏe cộng đồng.</p>
+        </section>
+
+        <div class="reviews-container">
+            <div class="box">
+                <div class="reviews-img">
+                    <img src="img/ADMIN1.jpg" alt="">
+                </div>
+                <h3>NGUYỄN MINH CHÂU</h3>
+                <p>MSSV: 2051050072</p>
+                <p>LỚP: TD20A</p>
+                <div class="contact-info">
+                    <a href="tel:0987654321" title="0961544946"><i class="fas fa-phone"></i></a>
+                    <a href="" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="reviews-container">
+            <div class="box">
+                <div class="reviews-img1">
+                    <img src="img/pcd 3d.jpg" alt="">
+                </div>
+                <h2>"Hệ thống phải có khả năng triển khai trên diện rộng với chi phí hợp lý, giúp nâng cao khả năng giám sát và quản lý chất lượng không khí tại nhiều khu vực khác nhau."</h2>
+            </div>
+            <div class="box">
+                <div class="reviews-img1">
+                    <img src="img/web_1111.png" alt="">
+                </div>
+                <h2>"Cung cấp cơ sở dữ liệu phong phú cho các nhà nghiên cứu, đồng thời hỗ trợ các nhà quản lý trong việc xây dựng và thực thi các chính sách liên quan đến bảo vệ môi trường và sức khỏe cộng đồng."</h2>
+            </div>
+            <div class="box">
+                <div class="reviews-img1">
+                    <img src="img/machthat.jpg" alt="">
+                </div>
+                <h2>"Xem xét các giải pháp truyền thông khác nhau như: RS485, Wi-Fi, Zigbee, LoRa, và GSM để lựa chọn giải pháp phù hợp nhất cho việc truyền dữ liệu từ các cảm biến đến trung tâm quản lý."
+                </h2>
+            </div>
+        </div>
+        
+        
+
+
+    </div>
+    
+
+    <style>
+
+.copyright {
+            color: white;
+            position: relative;
+            top: 15px;
+        }
+        .reviews-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,auto));
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+.reviews-img{
+   width: 130px; 
+   height: 130px;
+}
+.reviews-img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid var(--second-color);
+}
+
+.reviews-img1{
+   width: 400px; 
+   height: 200px;
+}
+.reviews-img1 img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media screen and (max-width: 760px) {
+    .reviews-img1 {
+        width: 320px;
+        height: 200px;
+    }
+    
+    .reviews-img1 img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+.reviews-container .box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 1px 4px 41px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+}
+
+
+.reviews-container .box h2{
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0.5rem 0 o.5rem;
+}
+.reviews-container .box p{
+    font-style: italic;
+}
+.reviews-container .box .star .bx{
+    color: var(--main-color);
+}
+
+.contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .contact-info a {
+            text-decoration: none;
+            color: #4CAF50;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+        nav {
+            margin: 20px;
+            text-align: center;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #4CAF50;
+        }
+        section {
+            padding: 20px;
+        }
+
+        .contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 10px;
+    font-size: 30px;
+}
+    </style>
+
+
+
+
+
+
+
+<script>
+    // Lấy phần tử form-popup
+    let formPopup = document.querySelector('.form-popup');
+
+    // Lấy phần tử li chứa liên kết Login
+    let loginLi = document.querySelector('.login-li');
+
+    // Thêm sự kiện click cho phần tử li
+    loginLi.addEventListener('click', function () {
+        // Hiển thị form-popup khi phần tử li được nhấn
+        formPopup.style.display = 'block';
+    });
+
+    // Lấy phần tử nút đóng
+    let closeButton = document.querySelector('.close-btn');
+
+    // Thêm sự kiện click cho nút đóng
+    closeButton.addEventListener('click', function () {
+        // Ẩn form-popup khi nút đóng được nhấn
+        formPopup.style.display = 'none';
+    });
+</script>
+
+
+</body>
+
+
+<script src="script.js"></script>
+
+<!-- Phần Script nút nhấn Login -->
+<script>
+let btn = document.querySelector('#btn');
+let sidebar = document.querySelector('.sidebar');
+let user = document.querySelector('.user');
+
+btn.onclick = function () {
+    sidebar.classList.toggle('active');
+    if (sidebar.classList.contains('active')) {
+        user.style.display = 'flex';
+    } else {
+        user.style.display = 'none';
+    }
+};
+</script>
+
+
+
+
+
+</body>
+</html>

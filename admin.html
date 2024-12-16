@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Detector</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="Icon" href="img/uth_logo_2.png">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="top">
+            <div class="logo">
+                <span>Air Quality Detector</span>
+            </div>
+            <i class="bx bx-menu" id="btn"></i> 
+        </div>
+        <div class="user">
+            <img src="img/uth_logo_2.png" alt="me" class="user-img">
+            <div>
+                <p class="bold">ĐẠI HỌC GIAO THÔNG VẬN TẢI TP.HCM</p>
+                <p>Admin</p>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <a href="admin.html">
+                    <i class="bx bxs-grid-alt"></i>
+                    <span class="nav-item">Operate</span>
+                </a>
+                <span class="tooltip">Operate</span>
+            </li>
+            <li>
+                <a href="infor.html">
+                    <i class="bx bx-body"></i>
+                    <span class="nav-item">Information</span>
+                </a>
+                <span class="tooltip">Information</span>
+            </li>
+
+            <li>
+                <a href="admin.html">
+                    <i class='bx bx-wind'></i>
+                    <span class="nav-item">PM2.5</span>
+                </a>
+                <span class="tooltip">PM2.5</span>
+            </li>
+            
+            <li>
+                <a href="admin.html">
+                    <i class='bx bx-wind'></i>
+                    <span class="nav-item">PM2.5</span>
+                </a>
+                <span class="tooltip">PM2.5</span>
+            </li>
+            <li>
+                <a href="admin.html">
+                    <i class='bx bx-wind'></i>
+                    <span class="nav-item">PM2.5</span>
+                </a>
+                <span class="tooltip">PM2.5</span>
+            </li>
+            <li class="login-li">
+                <a href="index.html">
+                    <i class="bx bx-log-out"></i>
+                    <span class="nav-item">Login</span>
+                </a>
+                <span class="tooltip">Login</span>
+            </li>            
+        </ul>
+    </div>
+
+    <div class="main-content" id="main-content">
+        <div class="container">
+            <h1>Air Quality Detector</h1>
+            <div class="box1">
+                <h2>Giá Trị PM10:</h2>
+                <p id="pm10Value">Đang cập nhật...</p>
+                <p id="pm10Status">Status: Đang cập nhật...</p> <!-- Phần tử để hiển thị trạng thái PM10 -->
+            </div>
+        </div>
+
+        <!-- Phần code biểu đồ nhiệt độ -->
+        
+        <div class="grid-container">
+            <div class="box">
+                <h2>Giá Trị Hiện Tại CO:</h2>
+                <p id="coValue">Đang cập nhật...</p>
+                <p id="coStatus">Status: Đang cập nhật...</p>
+            </div>
+            <div class="box">
+                <h2>Giá Trị Hiện Tại H2:</h2>
+                <p id="h2Value">Đang cập nhật...</p>
+                <p id="h2Status">Status: Đang cập nhật...</p>
+            </div>
+            <div class="box">
+                <h2>Giá Trị PM2.5:</h2>
+                <p id="pm25Value">Đang cập nhật...</p>
+                <p id="pm25Status">Status: Đang cập nhật...</p>
+            </div>
+            <div class="box">
+                <h2>Nhiệt độ</h2>
+                <p id="temperature">--°C</p>
+                <p id="temperatureStatus">Status: Đang cập nhật...</p>
+                <div class="gauge-chart-container">
+                    <div id="angularGaugeChartTemperature" style="width: 400px; height: 200px;"></div>
+                </div>
+            </div>
+            <div class="box">
+                <h2>Độ ẩm không khí</h2>
+                <p id="humidity_air">--%</p>
+                <p id="humidityStatus">Status: Đang cập nhật...</p>
+                <div class="gauge-chart-container">
+                    <div id="angularGaugeChartHumidityAir" style="width: 400px; height: 200px;"></div>
+                </div>
+            </div>
+            <div class="box">
+                <h2>Biểu Đồ CH4 - METAN</h2>
+                <p id="humidity_soil">--ppm</p>
+                <p id="ch4Status">Status: Đang cập nhật...</p>
+                <div class="gauge-chart-container">
+                    <div id="angularGaugeChartHumiditySoil" style="width: 400px; height: 200px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phần Script Firebase -->
+    <script>
+        // Cấu hình Firebase
+        var firebaseConfig = {
+            apiKey: "AIzaSyDecRJTH-1fxkJsTA0KFMCoh-Ps-tAUQNo",
+            authDomain: "air-monitoring-336ef.firebaseapp.com",
+            projectId: "air-monitoring-336ef",
+            storageBucket: "air-monitoring-336ef.appspot.com",
+            messagingSenderId: "71636060532",
+            appId: "1:71636060532:web:4f2bc5dcdffde8e3398421",
+            measurementId: "G-P8XFMJS8E6"
+        };
+
+        // Khởi tạo Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Lấy reference đến cơ sở dữ liệu
+        var database = firebase.database();
+
+        // Khởi tạo biểu đồ Gauge cho nhiệt độ
+        var temperatureGauge = createAngularGaugeChart('angularGaugeChartTemperature', 'Nhiệt độ', 0, 50);
+
+        // Khởi tạo biểu đồ Gauge cho độ ẩm không khí
+        var humidityAirGauge = createAngularGaugeChart('angularGaugeChartHumidityAir', 'Độ ẩm không khí', 0, 100);
+
+        // Khởi tạo biểu đồ Gauge cho CH4
+        var humiditySoilGauge = createAngularGaugeChart('angularGaugeChartHumiditySoil', 'Nồng độ CH4', 0, 10000);
+
+        // Hàm tạo biểu đồ Gauge
+        function createAngularGaugeChart(containerId, titleText, minValue, maxValue) {
+            return Highcharts.chart(containerId, {
+                chart: {
+                    type: 'solidgauge',
+                    width: 400,
+                    height: 200
+                },
+                title: null,
+                pane: {
+                    center: ['50%', '85%'],
+                    size: '140%',
+                    startAngle: -90,
+                    endAngle: 90,
+                    background: {
+                        backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#EEE',
+                        innerRadius: '60%',
+                        outerRadius: '100%',
+                        shape: 'arc'
+                    }
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                tooltip: {
+                    enabled: false
+                },
+                yAxis: {
+                    min: minValue,
+                    max: maxValue,
+                    stops: [
+                        [0.1, '#DF5353'],
+                        [0.5, '#DDDF0D'],
+                        [0.9, '#55BF3B']
+                    ],
+                    lineWidth: 0,
+                    tickWidth: 0,
+                    minorTickInterval: null,
+                    tickAmount: 2,
+                    title: {
+                        y: -70
+                    },
+                    labels: {
+                        y: 16
+                    }
+                },
+                plotOptions: {
+                    solidgauge: {
+                        dataLabels: {
+                            y: 5,
+                            borderWidth: 0,
+                            useHTML: true
+                        }
+                    }
+                },
+                series: [{
+                    name: titleText,
+                    data: [0], // Khởi tạo giá trị ban đầu
+                    dataLabels: {
+                        format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                            ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+                            '<span style="font-size:12px;color:silver"></span></div>'
+                    },
+                    tooltip: {
+                        valueSuffix: ''
+                    }
+                }]
+            });
+        }
+
+        // Cập nhật giá trị cho các biểu đồ gauge
+        function updateGauge(gauge, value) {
+            gauge.series[0].setData([value]);
+        }
+
+        // Cập nhật giá trị và trạng thái cho Nhiệt độ
+        function updateTemperature(value) {
+            var temperatureElement = document.getElementById("temperature");
+            var temperatureStatusElement = document.getElementById("temperatureStatus");
+
+            // Cập nhật giá trị Nhiệt độ
+            temperatureElement.textContent = value.toFixed(2) + "°C";
+
+            // Xác định trạng thái
+            var status = (value > 20 && value < 26) ? "Ideal Temperature" : "Insecure";
+            temperatureStatusElement.textContent = "Status: " + status;
+
+            // Cập nhật biểu đồ
+            updateGauge(temperatureGauge, value);
+        }
+
+        // Cập nhật giá trị và trạng thái cho Độ ẩm không khí
+        function updateHumidityAir(value) {
+            var humidityAirElement = document.getElementById("humidity_air");
+            var humidityStatusElement = document.getElementById("humidityStatus");
+
+            // Cập nhật giá trị Độ ẩm không khí
+            humidityAirElement.textContent = value.toFixed(2) + "%";
+
+            // Xác định trạng thái
+            var status = (value > 40 && value < 60) ? "Ideal Humidity" : "Insecure";
+            humidityStatusElement.textContent = "Status: " + status;
+
+            // Cập nhật biểu đồ
+            updateGauge(humidityAirGauge, value);
+        }
+
+        // Cập nhật giá trị và trạng thái cho CH4
+        function updateCH4(value) {
+            var ch4Element = document.getElementById("humidity_soil");
+            var ch4StatusElement = document.getElementById("ch4Status");
+
+            // Cập nhật giá trị CH4
+            ch4Element.textContent = value.toFixed(2) + " ppm";
+
+            // Xác định trạng thái
+            var status = (value > 5000) ? "Insecure" : "Healthy Safety";
+            ch4StatusElement.textContent = "Status: " + status;
+
+            // Cập nhật biểu đồ
+            updateGauge(humiditySoilGauge, value);
+        }
+
+        // Lấy dữ liệu từ Firebase và cập nhật giá trị và trạng thái
+        database.ref('Sensor/Temperature').on('value', function(snapshot) {
+            var temperatureValue = parseFloat(snapshot.val());
+            if (!isNaN(temperatureValue)) {
+                updateTemperature(temperatureValue);
+            }
+        });
+
+        database.ref('Sensor/Humidity').on('value', function(snapshot) {
+            var humidityAirValue = parseFloat(snapshot.val());
+            if (!isNaN(humidityAirValue)) {
+                updateHumidityAir(humidityAirValue);
+            }
+        });
+
+        database.ref('Sensor/CH4').on('value', function(snapshot) {
+            var ch4Value = parseFloat(snapshot.val());
+            if (!isNaN(ch4Value)) {
+                updateCH4(ch4Value);
+            }
+        });
+
+
+        function updateValue(ref, elementId) {
+            database.ref(ref).on('value', function(snapshot) {
+                var value = parseFloat(snapshot.val());
+                if (!isNaN(value)) {
+                    document.getElementById(elementId).innerText = value.toFixed(2);
+                }
+            });
+        }
+
+        // Gọi hàm để cập nhật các giá trị
+        updateValue('Sensor/CO', 'coValue');
+        updateValue('Sensor/H2', 'h2Value');
+        updateValue('Sensor/CH4', 'ch4Value');
+        updateValue('Sensor/Humidity', 'humidityValue');
+        updateValue('Sensor/PM10', 'pm10Value');
+        updateValue('Sensor/PM25', 'pm25Value');
+        updateValue('Sensor/Temperature', 'temperatureValue');
+
+
+
+        
+        
+    </script>
+
+
+<script>
+    // ... Các cấu hình và hàm khác
+
+    // Cập nhật giá trị và trạng thái cho CO
+    function updateCO(value) {
+        var coElement = document.getElementById("coValue");
+        var coStatusElement = document.getElementById("coStatus");
+
+        coElement.textContent = value.toFixed(2) + " ppm";
+        var status;
+        if (value > 0 && value <= 50) {
+            status = "GOOD";
+        } else if (value > 50 && value <= 100) {
+            status = "AVERAGE";
+        } else if (value > 100 && value <= 150) {
+            status = "Unhealthy for sensitive groups";
+        } else if (value > 150 && value <= 200) {
+            status = "Unhealty";
+        } else if (value > 200 && value <= 300) {
+            status = "Very Unhealty";
+        } else if (value > 300 && value <= 500) {
+            status = "Dangerous";
+        } else {
+            status = "OUT OF RANGE";
+        }
+        coStatusElement.textContent = "Status: " + status;
+    }
+
+    // Cập nhật giá trị và trạng thái cho H2
+    function updateH2(value) {
+        var h2Element = document.getElementById("h2Value");
+        var h2StatusElement = document.getElementById("h2Status");
+
+        h2Element.textContent = value.toFixed(2) + " ppm";
+        var status = (value > 4000) ? "Insecure" : "Healthy Safety";
+        h2StatusElement.textContent = "Status: " + status;
+    }
+    
+
+    // Cập nhật giá trị và trạng thái cho PM2.5
+    function updatePM25(value) {
+    var pm25Element = document.getElementById("pm25Value");
+    var pm25StatusElement = document.getElementById("pm25Status");
+
+    // Cập nhật giá trị PM2.5
+    pm25Element.textContent = value.toFixed(2) + " µg/m³";
+
+    // Xác định trạng thái
+    var status;
+    if (value > 0 && value <= 50) {
+            status = "GOOD";
+        } else if (value > 50 && value <= 100) {
+            status = "AVERAGE";
+        } else if (value > 100 && value <= 150) {
+            status = "Unhealthy for sensitive groups";
+        } else if (value > 150 && value <= 200) {
+            status = "Unhealty";
+        } else if (value > 200 && value <= 300) {
+            status = "Very Unhealty";
+        } else if (value > 300 && value <= 500) {
+            status = "Dangerous";
+        } else {
+            status = "OUT OF RANGE";
+        }
+    pm25StatusElement.textContent = "Status: " + status;
+}
+
+
+    // Cập nhật giá trị từ Firebase
+    database.ref('Sensor/CO').on('value', function(snapshot) {
+        var coValue = parseFloat(snapshot.val());
+        if (!isNaN(coValue)) {
+            updateCO(coValue);
+        }
+    });
+
+    database.ref('Sensor/H2').on('value', function(snapshot) {
+        var h2Value = parseFloat(snapshot.val());
+        if (!isNaN(h2Value)) {
+            updateH2(h2Value);
+        }
+    });
+
+    database.ref('Sensor/PM25').on('value', function(snapshot) {
+        var pm25Value = parseFloat(snapshot.val());
+        if (!isNaN(pm25Value)) {
+            updatePM25(pm25Value);
+        }
+    });
+
+
+
+
+    function updatePM10(value) {
+    var pm10Element = document.getElementById("pm10Value");
+    var pm10StatusElement = document.getElementById("pm10Status");
+
+    // Cập nhật giá trị PM10
+    pm10Element.textContent = value.toFixed(2) + " µg/m³";
+
+    // Xác định trạng thái
+    var status;
+    if (value > 0 && value <= 50) {
+            status = "GOOD";
+        } else if (value > 50 && value <= 100) {
+            status = "AVERAGE";
+        } else if (value > 100 && value <= 150) {
+            status = "Unhealthy for sensitive groups";
+        } else if (value > 150 && value <= 200) {
+            status = "Unhealty";
+        } else if (value > 200 && value <= 300) {
+            status = "Very Unhealty";
+        } else if (value > 300 && value <= 500) {
+            status = "Dangerous";
+        } else {
+            status = "OUT OF RANGE";
+        }
+    pm10StatusElement.textContent = "Status: " + status;
+}
+
+// Lấy dữ liệu từ Firebase và cập nhật giá trị và trạng thái cho PM10
+database.ref('Sensor/PM10').on('value', function(snapshot) {
+    var pm10Value = parseFloat(snapshot.val());
+    if (!isNaN(pm10Value)) {
+        updatePM10(pm10Value);
+    }
+});
+
+
+
+
+    
+</script>
+
+<script>
+    // Lấy phần tử form-popup
+    let formPopup = document.querySelector('.form-popup');
+
+    // Lấy phần tử li chứa liên kết Login
+    let loginLi = document.querySelector('.login-li');
+
+    // Thêm sự kiện click cho phần tử li
+    loginLi.addEventListener('click', function () {
+        // Hiển thị form-popup khi phần tử li được nhấn
+        formPopup.style.display = 'block';
+    });
+
+    // Lấy phần tử nút đóng
+    let closeButton = document.querySelector('.close-btn');
+
+    // Thêm sự kiện click cho nút đóng
+    closeButton.addEventListener('click', function () {
+        // Ẩn form-popup khi nút đóng được nhấn
+        formPopup.style.display = 'none';
+    });
+</script>
+
+<script>
+    let btn = document.querySelector('#btn');
+    let sidebar = document.querySelector('.sidebar');
+    let user = document.querySelector('.user');
+    btn.onclick = function () {
+        sidebar.classList.toggle('active');
+        if (sidebar.classList.contains('active')) {
+            user.style.display = 'flex';
+        } else {
+            user.style.display = 'none';
+        }
+    };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1134 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --main-color: #fe5b3d;
+    --second-color: #ffac38;
+    --text-color: #444;
+    --gradient: linear-gradient(#fe5b3d,#ffac38);
+}
+.logo {
+    margin-top: 15px;
+}
+
+.logo img {
+    align-items: center;
+}
+
+.logo span {
+    font-size: 12px; /* Kích thước chữ */
+    font-weight: bold; /* Độ đậm của chữ */
+    color: #FFF; /* Màu chữ */
+    /* Các thuộc tính CSS khác tùy theo nhu cầu thiết kế của bạn */
+}
+
+/* CSS cho hình ảnh */
+.user-img {
+    width: 100px; /* Độ rộng của hình ảnh */
+}
+
+#topic p {
+  color: white;
+}
+
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 80px;
+    background-color: #191970;
+    padding: 0.4rem 0.8rem;
+    transition: all 0.5s ease;
+}
+
+
+
+
+.sidebar.active ~ .main-content {
+    left: 250px; /* Dịch chuyển nội dung chính sang phải khi thanh bên mở */
+    width: calc(100% - 250px); /* Đặt chiều rộng của nội dung chính khi thanh bên mở */
+}
+
+
+.sidebar.active {
+    width: 250px;
+}
+
+
+
+.sidebar #btn {
+    position: absolute;
+    color: #fff;
+    top: 0.4rem;
+    left: 50%;
+    font-size: 1.2rem;
+    line-height: 50px;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+
+.sidebar.active #btn {
+    left: 90%;
+}
+
+.sidebar .top .logo {
+    display: flex;
+    height: 50px;
+    width: 100%;
+}
+
+.sidebar .top .logo {
+    display: flex;
+    height: 50px;
+    width: 100%;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.sidebar.active .top .logo {
+    opacity: 1;
+}
+
+.top .logo i {
+    font-size: 2rem;
+    margin-right: 5px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    display: none;
+}
+
+.user p {
+    color: #fff;
+    opacity: 1;
+    margin-left: 1rem;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.sidebar p {
+    opacity: 0;
+}
+
+.sidebar.active p {
+    opacity: 1;
+}
+
+.sidebar ul li {
+    position: relative;
+    list-style-type: none;
+    height: 50px;
+    width: 90%;
+    margin: 0.8rem auto;
+    line-height: 50px;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 0.8rem;
+}
+
+
+.sidebar ul li a:hover {
+    background-color: #fff;
+    color: #12171e;
+}
+
+.sidebar ul li a i {
+    min-width: 50px;
+    text-align: center;
+    height: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+}
+
+
+.sidebar .nav-item {
+    opacity: 0;
+}
+
+.sidebar.active .nav-item {
+    opacity: 1;
+}
+
+
+.sidebar ul li .tooltip {
+    position: absolute;
+    left: 125px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
+    border-radius: 0.6rem;
+    padding: 0.4rem 1.2rem;
+    line-height: 1.8rem;
+    z-index: 20;
+    opacity: 0;
+}
+
+.sidebar ul li:hover .tooltip {
+    opacity: 1;
+}
+
+
+.sidebar.active ul li .tooltip {
+    display: none;
+}
+
+.main-content {
+    position: relative;
+    background-color: #eee;
+    min-height: 100vh;
+    top: 0;
+    left: 80px;
+    transition: all 0.5s ease;
+    width: calc(100% - 80px);
+    padding: 1rem;
+    background-color: white;
+}
+
+.main-content .container h1 {
+    margin-top: -12px; /* Di chuyển phần tử h1 lên 20px */
+    color: white;
+}
+
+h1 {
+  color: white;
+}
+
+
+/* Định dạng form-popup */
+.form-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(226, 5, 34, 0.1);
+    z-index: 9999;
+}
+
+/* Định dạng close-btn */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #999;
+}
+
+/* Định dạng form-details */
+.form-details {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Định dạng form-content */
+.form-content {
+    text-align: center;
+}
+
+/* Định dạng input-field */
+.input-field {
+    margin-bottom: 15px;
+}
+
+/* Định dạng label */
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Định dạng input */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Định dạng forgot-pass-link */
+.forgot-pass-link {
+    display: block;
+    margin-top: 10px;
+    color: #555;
+}
+
+/* Định dạng button */
+button[type="submit"] {
+    background-color: #4267B2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Định dạng bottom-link */
+.bottom-link {
+    margin-top: 20px;
+    color: #555;
+}
+
+/* Định dạng link */
+.bottom-link a {
+    color: #4267B2;
+    text-decoration: none;
+}
+
+
+
+
+/* định dạng thời gian thực */
+
+.clock {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+    margin-top: -20px;
+}
+
+.date, .time {
+    margin-right: 20px; /* Điều chỉnh khoảng cách giữa "Ngày" và "Giờ" */
+}
+
+
+/* định dạng biểu đồ qautj cho nhiệt độ */
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    text-align: center;
+}
+
+.box {
+    border: 2px solid #333;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
+
+.box h2 {
+    margin-top: 0;
+}
+
+.box p {
+    margin-bottom: 5px;
+    font-size: 25px;
+}
+
+.gauge-chart-container div {
+    display: flex;
+    justify-content: space-around;/* Căn giữa và đều các biểu đồ */
+    border-radius: 0.5rem; /* Làm tròn góc cho tất cả các biểu đồ */
+    position: relative;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+  align-items: center; /* Căn giữa nội dung theo chiều dọc */
+  min-height: 100vh; /* Chiều cao tối thiểu của body là toàn bộ chiều cao của viewport */
+  background-color: #f4f4f4; /* Màu nền của trang */
+}
+
+.container {
+  display: flex;
+  flex-direction: column; /* Xếp các phần tử theo chiều dọc */
+  align-items: center; /* Căn giữa các phần tử theo chiều ngang */
+}
+
+h1 {
+  margin-bottom: 20px; /* Khoảng cách dưới h1 */
+}
+
+.box1 {
+  width: 300px; /* Chiều ngang của box */
+  height: 200px; /* Chiều dọc của box */
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Căn giữa nội dung theo chiều dọc */
+  align-items: center; /* Căn giữa nội dung theo chiều ngang */
+  margin-left: auto; /* Đẩy box1 về bên phải */
+  margin-right: auto; /* Đẩy box1 về bên trái */
+}
+
+.copyright {
+    margin-top: -15px; /* Di chuyển lên 20px */
+    color: white;
+
+
+}
+
+
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: url('img/background_control1111.jpg') no-repeat center center fixed; /* Nền cho toàn bộ trang */
+  background-size: cover;
+}
+
+.dashboard-container {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  color: white;
+}
+
+.main-content {
+  position: relative;
+  background: url('img/background_control1111.jpg') no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+  top: 0;
+  left: 80px;
+  transition: all 0.5s ease;
+  width: calc(100% - 80px);
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow: hidden; /
+  
+}
+
+
+.box_giatri .giatri-item p {
+    font-weight: bold;
+    font-size: 25px;
+    margin: 5px 0;
+}
+
+
+.control_h1 {
+    display: flex; /* Sử dụng flexbox */
+    justify-content: center; /* Canh giữa theo chiều ngang */
+    align-items: center; /* Canh giữa theo chiều dọc */
+    margin: 10px;
+    color: white;
+}
+
+.control_h1 h1 {
+    margin: 0; /* Loại bỏ margin mặc định của h1 */
+}
+
+
+.control-panel {
+    display: flex;
+    flex-direction: row; /* Sắp xếp các phần tử theo chiều ngang */
+    justify-content: center; /* Canh giữa các phần tử */
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.control-panel button {
+    margin-bottom: 10px;
+    margin-right: 10px; /* Khoảng cách giữa các nút nhấn */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: var(--second-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.control-panel button:hover {
+    background-color: var(--main-color);
+}
+
+.status-mode {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.status-mode h2 {
+    margin-right: 10px;
+    font-weight: 200;
+    color: white;
+}
+
+
+
+.box_giatri {
+    display: flex;
+    justify-content: space-between; /* Chia đều khoảng cách giữa các phần tử */
+    align-items: center;
+    padding: 10px; /* Khoảng cách nội bộ */
+    margin-top: -20px;
+}
+
+.giatri-item {
+    flex-grow: 1; /* Tự động mở rộng để lấp đầy không gian */
+    margin: 10px;
+    border: 2px solid #333; /* Viền đậm */
+    border-radius: 5px; /* Bo tròn các góc */
+    padding: 20px; /* Khoảng cách nội bộ */
+    text-align: center; /* Căn giữa nội dung */
+    color: white;
+}
+
+.giatri-item h2 {
+    margin-top: 0; /* Loại bỏ khoảng trống phía trên của tiêu đề */
+}
+
+.giatri-item:nth-child(1) {
+  background: linear-gradient(to right, #248469, #489752); /* Gradient màu xanh dương */
+}
+.giatri-item:nth-child(2) {
+  background: linear-gradient(to right, #e93622, #e84931); /* Gradient màu đỏ */
+}
+.giatri-item:nth-child(3) {
+  background: linear-gradient(to right, #ff7902, #ff9900); /* Gradient màu cam */
+}
+
+
+
+.date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Khoảng cách giữa các nhóm */
+  padding: 20px; /* Padding bên trong khung */
+  margin: 0 auto; /* Căn giữa khung */
+  max-width: 600px; /* Giới hạn chiều rộng tối đa */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng */
+  border-radius: 10px; /* Bo tròn các góc */
+  background-color: #38bcce;
+}
+
+.date h2 {
+  margin-bottom: 20px; /* Khoảng cách dưới của tiêu đề chính */
+}
+
+.date div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Khoảng cách dưới của mỗi nhóm */
+}
+
+.date h3 {
+  margin-right: 10px; /* Khoảng cách phải của tiêu đề phụ */
+}
+
+.date label {
+  margin-right: 5px; /* Khoảng cách phải của label */
+}
+
+.date input[type="number"],
+.date input[type="text"] {
+  width: 70px; /* Chiều rộng của ô nhập */
+  height: 30px; /* Chiều cao của ô nhập */
+  padding: 5px; /* Padding bên trong ô nhập */
+  box-sizing: border-box; /* Tính cả padding và border vào kích thước */
+  border: 1px solid #ccc; /* Viền của ô nhập */
+  border-radius: 5px; /* Bo tròn góc */
+}
+
+.date input[type="text"] {
+  width: auto; /* Chiều rộng tự động cho ô nhập dạng text */
+}
+
+.date input[type="number"] {
+  margin-right: 10px; /* Khoảng cách phải của ô nhập số */
+}
+
+.date input[type="text"][readonly] {
+  background-color: #f0f0f0; /* Màu nền cho ô nhập chỉ đọc */
+}
+
+.date input[type="text"][readonly]:hover {
+  cursor: not-allowed; /* Con trỏ khi di chuột vào ô nhập chỉ đọc */
+}
+
+
+
+.timer_light {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Khoảng cách giữa các nhóm */
+  border: 1px solid #ccc; /* Bo khung */
+  padding: 20px; /* Padding bên trong khung */
+  margin: 0 auto; /* Căn giữa khung */
+  max-width: 600px; /* Giới hạn chiều rộng tối đa */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng */
+  border-radius: 10px; /* Bo tròn các góc */
+}
+
+.timer_light {
+  margin-bottom: 20px; /* Khoảng cách dưới của tiêu đề chính */
+}
+
+.timer_light div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Khoảng cách dưới của mỗi nhóm */
+}
+
+.timer_light h3 {
+  margin-right: 10px; /* Khoảng cách phải của tiêu đề phụ */
+}
+
+.timer_light label {
+  margin-right: 5px; /* Khoảng cách phải của label */
+}
+
+.timer_light input[type="number"],
+.timer_light input[type="text"] {
+  width: 70px; /* Chiều rộng của ô nhập */
+  height: 30px; /* Chiều cao của ô nhập */
+  padding: 5px; /* Padding bên trong ô nhập */
+  box-sizing: border-box; /* Tính cả padding và border vào kích thước */
+  border: 1px solid #ccc; /* Viền của ô nhập */
+  border-radius: 5px; /* Bo tròn góc */
+}
+
+.timer_light input[type="text"] {
+  width: auto; /* Chiều rộng tự động cho ô nhập dạng text */
+}
+
+.timer_light input[type="number"] {
+  margin-right: 10px; /* Khoảng cách phải của ô nhập số */
+}
+
+.timer_light input[type="text"][readonly] {
+  background-color: #f0f0f0; /* Màu nền cho ô nhập chỉ đọc */
+}
+
+.timer_light input[type="text"][readonly]:hover {
+  cursor: not-allowed; /* Con trỏ khi di chuột vào ô nhập chỉ đọc */
+}
+
+
+
+
+
+
+
+
+
+
+/* CSS cho toggle switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 80px; /* Kích thước gấp đôi */
+    height: 40px; /* Kích thước gấp đôi */
+  }
+  
+  /* ẩn input checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* style của toggle */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--main-color);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 40px; /* Đường cong gấp đôi */
+  }
+  
+  /* khi toggle được bật, đổi màu nền */
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 36px; /* Kích thước gấp đôi - 4px */
+    width: 36px; /* Kích thước gấp đôi - 4px */
+    left: 2px; /* Độ lệch để nút nằm giữa */
+    bottom: 2px; /* Độ lệch để nút nằm giữa */
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%; /* Hình tròn */
+  }
+  
+  input:checked + .slider {
+    background-color: var(--main-color);
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(40px); /* Di chuyển nút về phía bên phải */
+    -ms-transform: translateX(40px); /* Di chuyển nút về phía bên phải */
+    transform: translateX(40px); /* Di chuyển nút về phía bên phải */
+  }
+  
+  /* Hiển thị chế độ */
+  .mode-label {
+    position: absolute;
+    bottom: 8px; /* Độ lệch dưới */
+    left: 8px; /* Độ lệch trái */
+    font-size: 16px; /* Kích thước chữ */
+    color: white; /* Màu chữ */
+    opacity: 0; /* Ẩn mặc định */
+    transition: opacity 0.4s; /* Hiệu ứng mờ dần */
+  }
+  
+  /* Hiển thị chế độ khi toggle được bật */
+  input:checked + .slider + .mode-label {
+    opacity: 1; /* Hiển thị */
+  }
+  
+
+
+  .dashboard-container {
+    text-align: center;
+}
+
+.control_h1 {
+    margin-bottom: 20px;
+}
+
+.control-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.control-grid {
+  flex: 1 0 30%; /* Đặt kích thước cơ bản cho mỗi đối tượng */
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+
+.pump {
+  margin-bottom: 20px;
+}
+
+.control-fan {
+    text-align: center;
+}
+
+.control-fan h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+
+
+.giatri-item span {
+  white-space: nowrap;
+}
+
+.symbol {
+    width: 150px; /* Kích thước chiều rộng */
+    height: auto; /* Chiều cao tự động điều chỉnh dựa trên tỷ lệ hình ảnh */
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:active {
+    background-color: #3e8e41;
+}
+
+
+
+
+.red-button {
+    background-color: red; /* Màu nền đỏ */
+    color: white; /* Màu chữ trắng để dễ đọc */
+    border: none; /* Loại bỏ viền mặc định */
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    border-radius: 5px; /* Bo tròn các góc */
+    cursor: pointer; /* Thay đổi con trỏ chuột khi di chuyển qua nút */
+}
+
+.red-button:hover {
+    background-color: darkred; /* Màu nền đỏ đậm khi di chuột qua */
+}
+
+
+#button2, #toggleButton, #btnOffId_01 {
+  background-color: green; /* Màu xanh cho nút ON */
+
+}
+#button3, #btnOnId_01, #button1 {
+  background-color: red; /* Màu đỏ cho nút OFF */
+}
+
+#button2:active, #toggleButton:active, #btnOffId_01:active, #button3:active, #btnOnId_01:active, #button1:active  {
+            transform: translateY(2px); /* Hiệu ứng nhấn xuống */
+        }
+
+
+.status img {
+  width: 50px;
+  height: 50px;
+}
+
+
+.status {
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status > div {
+  margin-bottom: 10px;
+}
+
+.status > div > span {
+  margin-right: 10px;
+}
+
+.status img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.control-grid img {
+  width: 100px; /* Kích thước ảnh */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+
+h3 {
+  font-size: 30px; /* Kích thước chữ cho thẻ h3 */
+}
+
+
+
+#pump1-status {
+  font-weight: bold; /* In đậm */
+  font-size: 20px; /* Kích thước chữ */
+}
+
+#pump2-status {
+  font-weight: bold; /* In đậm */
+  font-size: 20px; /* Kích thước chữ */
+}
+
+#light-status {
+  font-weight: bold; /* In đậm */
+  font-size: 20px; /* Kích thước chữ */
+}
+
+
+
+/* Style cho ảnh pump */
+.pump img {
+  max-width: 100px; /* Điều chỉnh kích thước ảnh */
+}
+
+    /* CSS để bo tròn phần control-Pump và control-grid */
+    .control-Pump, .control-grid {
+      border-radius: 10px; /* Điều chỉnh độ cong của góc */
+      border: 1px solid #b39136; /* Thêm đường viền nếu cần */
+      padding: 10px; /* Tăng khoảng cách để làm cho góc cong rõ ràng hơn */
+      margin-bottom: 10px; /* Khoảng cách giữa các phần */
+  }
+
+.appliances {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 340px;
+    margin: 30px auto;
+  }
+  
+  .appliance {
+    position: relative;
+    height: 170px;
+    width: 45%;
+    margin: 10px 0;
+  }
+  .appliance span {
+    position: relative;
+  }
+  .appliance span::before, .appliance span::after {
+    text-transform: uppercase;
+    font-size: 12px;
+    position: absolute;
+    left: 0;
+  }
+  .appliance span::before {
+    content: attr(data-o);
+    opacity: 0;
+  }
+  .appliance span::after {
+    content: attr(data-c);
+  }
+  .appliance strong {
+    margin: 70px 0 10px;
+    display: block;
+    font-size: 18px;
+  }
+  .appliance label {
+    position: absolute;
+    width: 74%;
+    height: 71%;
+    cursor: pointer;
+    padding: 20px;
+    box-shadow: 1px 0 10px 10px rgba(0, 0, 0, 0.03);
+    border-radius: 30px;
+  }
+  .appliance label::before {
+    border-radius: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background-color: white;
+    content: "";
+  }
+  .appliance label * {
+    position: relative;
+    transition: 200ms;
+  }
+  .appliance label small {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #ff574e;
+    border-radius: 10px;
+    top: 30px;
+    right: 20px;
+    transition: 200ms;
+  }
+  .appliance label small::after, .appliance label small::before {
+    content: "";
+  }
+  .appliance label .f {
+    width: 16px;
+    height: 22px;
+    background-color: #3976f6;
+    display: block;
+    position: absolute;
+    border-radius: 2px;
+    top: 30px;
+    background-image: linear-gradient(0deg, white 2px, transparent 2px), linear-gradient(0deg, white 12px, transparent 0);
+    background-size: 17px 9px, 2px 15px;
+    background-position: 0 0, 3px 0;
+    background-repeat: no-repeat;
+  }
+  .appliance label .a {
+    width: 23px;
+    height: 10px;
+    background-color: #3976f6;
+    display: block;
+    position: absolute;
+    border-radius: 2px;
+    top: 30px;
+    background-image: linear-gradient(0deg, white 2px, transparent 2px);
+    background-size: 17px 9px;
+    background-position: 3px -2px;
+    background-repeat: no-repeat;
+  }
+  .appliance label .a::after, .appliance label .a::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: transparent transparent #3976f6;
+    top: 10px;
+    border-radius: 50%;
+    transform: rotate(72deg);
+    display: block;
+  }
+  .appliance label .a::after {
+    left: 14px;
+  }
+  .appliance label .a::before {
+    left: 6px;
+  }
+  .appliance label .r {
+    width: 23px;
+    height: 9px;
+    background-color: #3976f6;
+    display: block;
+    position: absolute;
+    border-radius: 3px;
+    top: 30px;
+  }
+  .appliance label .r::after, .appliance label .r::before {
+    content: "";
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgba(57, 118, 246, 0.61) transparent transparent;
+    border-radius: 50%;
+    position: absolute;
+    display: block;
+  }
+  .appliance label .r::after {
+    width: 22px;
+    height: 20px;
+    top: -11px;
+    left: -2px;
+  }
+  .appliance label .r::before {
+    width: 16px;
+    height: 20px;
+    top: -6px;
+    left: 1px;
+  }
+  .appliance label .l {
+    width: 22px;
+    height: 13px;
+    background-color: #3976f6;
+    display: block;
+    position: absolute;
+    border-radius: 22px 22px 0 0;
+    top: 30px;
+  }
+  .appliance label .l::before {
+    content: "";
+    width: 3px;
+    height: 8px;
+    background-color: rgba(57, 118, 246, 0.61);
+    display: block;
+    top: -8px;
+    position: absolute;
+    border-radius: 3px;
+    left: 9px;
+  }
+  .appliance label .l::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 4px;
+    background: rgba(57, 118, 246, 0.61);
+    border-radius: 0 0 9px 9px;
+    top: 14px;
+    left: 6px;
+  }
+  .appliance input {
+    display: none;
+  }
+  .appliance input:checked + label::before {
+    content: "";
+    background: linear-gradient(to bottom, #59a2fb 0%, #3976f6 100%);
+  }
+  .appliance input:checked + label * {
+    color: white;
+  }
+  .appliance input:checked + label i {
+    background-color: white;
+  }
+  .appliance input:checked + label i::before, .appliance input:checked + label i::after {
+    background-color: rgba(255, 255, 255, 0.61);
+  }
+  .appliance input:checked + label i.f {
+    background-image: linear-gradient(0deg, rgba(89, 162, 251, 0.61) 2px, transparent 2px), linear-gradient(0deg, rgba(89, 162, 251, 0.61) 12px, transparent 0);
+  }
+  .appliance input:checked + label i.a {
+    background-image: linear-gradient(0deg, rgba(89, 162, 251, 0.61) 2px, transparent 2px);
+  }
+  .appliance input:checked + label i.a::before, .appliance input:checked + label i.a::after {
+    background-color: rgba(255, 255, 255, 0);
+    border-color: transparent transparent rgba(255, 255, 255, 0.61);
+  }
+  .appliance input:checked + label i.r {
+    background-color: white;
+  }
+  .appliance input:checked + label i.r::before, .appliance input:checked + label i.r::after {
+    background-color: rgba(255, 255, 255, 0);
+    border-color: rgba(255, 255, 255, 0.61) transparent transparent;
+  }
+  .appliance input:checked + label small {
+    width: 30px;
+    height: 15px;
+    background-color: #3976f6;
+  }
+  .appliance input:checked + label small::before {
+    width: 13px;
+    height: 13px;
+    background-color: white;
+    display: block;
+    border-radius: 13px;
+    top: 1px;
+    position: absolute;
+  }
+  .appliance input:checked + label span::before {
+    opacity: 1;
+  }
+  .appliance input:checked + label span::after {
+    opacity: 0;
+  }

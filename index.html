@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Detector</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="img/uth_logo_2.png">
+</head>
+<body>
+<!-- Phần Script nút nhấn Login -->
+<div class="blur-bg-overlay"></div>
+<div class="form-popup">
+    <span class="close-btn material-symbols-rounded">&#10006;</span>
+    <div class="form-box login">
+        <div class="form-details">
+            <h2>LOGIN</h2>
+            <h2>Welcome Back Air Quality Detector</h2>
+            <p>Please log in using your personal information to stay connected with us</p>
+        </div>
+        <div class="form-content">
+            <form id="login-form" onsubmit="return handleLogin()">
+                <div class="input-field">
+                    <label>Email</label>
+                    <input type="text" id="email" required>
+                </div>
+                <div class="input-field">
+                    <label>Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <a href="#" class="forgot-pass-link">Forgot password?</a>
+                <button type="submit">Log In</button>
+            </form>
+            <div class="bottom-link">
+                Don't have an account?
+                <a href="#" id="signup-link">Signup</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<style>
+                    .copyright {
+            color: black;
+            position: relative;
+            top: 15px;
+            right: -40px;
+        }
+</style>
+
+<script>
+function handleLogin() {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+
+    if (email === "admin@gmail.com" && password === "admin") {
+        window.location.href = "admin.html";
+        return false;
+    } else {
+        alert("Incorrect email or password. Please try again.");
+        return false;
+    }
+}
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Lắng nghe sự kiện submit của form
+        var loginForm = document.querySelector("form"); // Chọn form của bạn bằng cách thay "form" bằng class hoặc id của form nếu có
+        loginForm.addEventListener("submit", function(event) {
+            // Ngăn chặn hành động mặc định của form (nếu bạn không muốn gửi form)
+            event.preventDefault();
+
+            // Đặt lại giá trị của các input fields về chuỗi rỗng
+            var emailInput = document.querySelector('input[type="text"]');
+            var passwordInput = document.querySelector('input[type="password"]');
+            
+            emailInput.value = "";
+            passwordInput.value = "";
+        });
+    });
+</script>
+
+
+</body>
+</html>
